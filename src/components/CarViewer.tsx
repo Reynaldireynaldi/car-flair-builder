@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { Mesh, MeshBasicMaterial, PerspectiveCamera, Scene, WebGLRenderer, Vector3 } from 'three';
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as THREE from 'three';
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
-import Stats from 'three/examples/jsm/libs/stats.module';
-import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
+import Stats from 'three/examples/jsm/libs/stats.module.js';
+import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
 import { useCarConfig } from '@/hooks/useCarConfig';
 
 const CarViewer = () => {
