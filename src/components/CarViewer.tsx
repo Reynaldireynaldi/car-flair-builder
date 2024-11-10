@@ -6,10 +6,12 @@ import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHel
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
 import { useCarConfig } from '@/hooks/useCarConfig';
+import { useTheme } from 'next-themes';
 
 const CarViewer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { color, wheelType } = useCarConfig();
+  const { theme } = useTheme();
   
   useEffect(() => {
     if (!containerRef.current) return;
@@ -91,7 +93,16 @@ const CarViewer = () => {
     };
   }, [color, wheelType]);
 
-  return <div ref={containerRef} className="w-full h-screen bg-gradient-to-b from-gray-900 to-gray-800" />;
+  return (
+    <div 
+      ref={containerRef} 
+      className={`w-full h-screen ${
+        theme === 'dark' 
+          ? 'bg-gradient-to-b from-gray-900 to-gray-800' 
+          : 'bg-gradient-to-b from-gray-100 to-white'
+      }`} 
+    />
+  );
 };
 
 export default CarViewer;
