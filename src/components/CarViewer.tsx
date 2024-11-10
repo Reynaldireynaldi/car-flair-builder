@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFLoader } from 'three-stdlib';
 import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
 import { useCarConfig } from '@/hooks/useCarConfig';
@@ -16,15 +16,15 @@ const CarModel = () => {
   useEffect(() => {
     if (gltf) {
       scene.environment = createEnvironmentMap();
-      scene.environment.encoding = THREE.sRGBEncoding;
+      scene.environment.colorSpace = THREE.SRGBColorSpace;
     }
   }, [gltf, scene]);
 
   useEffect(() => {
     if (carRef.current) {
-      const bodyMaterial = carRef.current.getObjectByName('body')?.material;
-      if (bodyMaterial) {
-        updateMaterialColor(bodyMaterial, color);
+      const bodyMesh = carRef.current.getObjectByName('body');
+      if (bodyMesh && bodyMesh instanceof THREE.Mesh) {
+        updateMaterialColor(bodyMesh.material, color);
       }
     }
   }, [color]);

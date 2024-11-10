@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create as createStore } from 'zustand';
 
 interface CarConfig {
   color: string;
@@ -7,7 +7,7 @@ interface CarConfig {
   setWheelType: (wheelType: string) => void;
 }
 
-export const useCarConfig = create<CarConfig>((set) => ({
+export const useCarConfig = createStore<CarConfig>((set) => ({
   color: '#FF0000',
   wheelType: 'standard',
   setColor: (color) => set({ color }),
