@@ -24,7 +24,7 @@ const CarViewer = () => {
 
     // Camera position
     camera.position.set(5, 2, 5);
-    camera.lookAt(new Vector3(0, 0, 0));
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
