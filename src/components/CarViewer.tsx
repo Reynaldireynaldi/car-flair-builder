@@ -5,26 +5,22 @@ import { GLTFLoader } from 'three-stdlib';
 import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
 import { useCarConfig } from '@/hooks/useCarConfig';
-import { createEnvironmentMap, updateMaterialColor } from '@/lib/three-utils';
 
 const CarModel = () => {
   const { color, wheelType } = useCarConfig();
   const gltf = useLoader(GLTFLoader, '/models/car.glb');
   const carRef = useRef<THREE.Group>();
-  const { scene } = useThree();
-
-  useEffect(() => {
-    if (gltf) {
-      scene.environment = createEnvironmentMap();
-      scene.environment.colorSpace = THREE.SRGBColorSpace;
-    }
-  }, [gltf, scene]);
 
   useEffect(() => {
     if (carRef.current) {
       const bodyMesh = carRef.current.getObjectByName('body');
       if (bodyMesh && bodyMesh instanceof THREE.Mesh) {
-        updateMaterialColor(bodyMesh.material, color);
+        if (bodyMesh.material instanceof THREE.MeshStandardMaterial) {
+          bodyMesh.material.color.set(color);
+          bodyMesh.material.metalness = 0.8;
+          bodyMesh.material.roughness = 0.2;
+          bodyMesh.material.needsUpdate = true;
+        }
       }
     }
   }, [color]);
@@ -33,8 +29,6 @@ const CarModel = () => {
     if (carRef.current) {
       const wheels = carRef.current.getObjectByName('wheels');
       if (wheels) {
-        // Apply wheel changes based on selected type
-        // This is a placeholder for actual wheel model switching
         const scale = wheelType === 'sport' ? 1.1 : wheelType === 'luxury' ? 1.2 : 1;
         wheels.scale.set(scale, scale, scale);
       }
