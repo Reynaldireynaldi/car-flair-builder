@@ -4,7 +4,7 @@ import ConfigPanel from '@/components/ConfigPanel';
 
 const Index = () => {
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen bg-background">
       <CarViewer />
       <ConfigPanel />
     </div>

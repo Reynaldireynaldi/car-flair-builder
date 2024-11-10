@@ -11,14 +11,14 @@ const ConfigPanel = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="fixed right-0 top-0 h-full w-80 bg-black/30 backdrop-blur-sm p-6 space-y-6 animate-fade-in">
+    <div className="fixed right-0 top-0 h-full w-80 bg-background/30 backdrop-blur-sm p-6 space-y-6 animate-fade-in border-l border-border/50">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-white">Customize Your Car</h2>
+        <h2 className="text-2xl font-bold text-foreground">Customize Your Car</h2>
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          className="text-white hover:text-white/80"
+          className="text-foreground hover:text-foreground/80"
         >
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
         </Button>

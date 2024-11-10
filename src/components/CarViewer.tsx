@@ -21,6 +21,9 @@ const CarViewer = () => {
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     
+    // Set renderer background color based on theme
+    renderer.setClearColor(theme === 'dark' ? 0x1a1a1a : 0xffffff);
+    
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
 
@@ -85,22 +88,23 @@ const CarViewer = () => {
     };
     window.addEventListener('resize', handleResize);
 
+    // Update renderer background color when theme changes
+    const updateBackground = () => {
+      renderer.setClearColor(theme === 'dark' ? 0x1a1a1a : 0xffffff);
+    };
+
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
       containerRef.current?.removeChild(renderer.domElement);
       renderer.dispose();
     };
-  }, [color, wheelType]);
+  }, [color, wheelType, theme]);
 
   return (
     <div 
       ref={containerRef} 
-      className={`w-full h-screen ${
-        theme === 'dark' 
-          ? 'bg-gradient-to-b from-gray-900 to-gray-800' 
-          : 'bg-gradient-to-b from-gray-100 to-white'
-      }`} 
+      className={`w-full h-screen bg-background transition-colors duration-300`}
     />
   );
 };
